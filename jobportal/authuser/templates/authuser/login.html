@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; margin: 0;">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P9 Job Portal Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            height: 100%;
+        }
+
+        #root {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        .bg-image {
+            background-image: url('https://wallpaperaccess.com/full/4623486.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            position: relative;
+        }
+
+        main {
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <header class="bg-gray-800 text-white py-4">
+            <div class="container mx-auto flex justify-between items-center px-4">
+                <h1 class="text-2xl font-bold">P9 Job Portal</h1>
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a href="{% url 'home' %}" class="hover:text-gray-400">Home</a></li>
+                        <li><a href="#" class="hover:text-gray-400">News</a></li>
+                        <li><a href="#" class="hover:text-gray-400">Companies</a></li>
+                        <li><a href="#" class="hover:text-gray-400">Testimonial</a></li>
+                        <li><a href="#" class="hover:text-gray-400">About</a></li>
+                    </ul>
+                </nav>
+                <div class="flex space-x-4">
+                    <a href="{% url 'login' %}" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Login</a>
+                    <a href="{% url 'register' %}" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Sign Up</a>
+                </div>
+            </div>
+        </header>
+        <main class="bg-image">
+            <div class="login-box bg-white p-8 rounded-lg shadow-lg max-w-6xl mx-auto">
+                <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
+                <form class="login-form" method="post" action="">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <input type="text" placeholder="Username" name="username" required
+                            class="border border-gray-300 rounded py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div class="mb-4">
+                        <input type="password" placeholder="Password" name="password" required
+                            class="border border-gray-300 rounded py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    {% if msg %}
+                    <div class="error-msg bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{{ msg }}</div>
+                    {% endif %}
+                    <button type="submit"
+                        class="bg-green-500 hover:bg-green-600 text-white rounded py-2 px-4 w-full">Login</button>
+                </form>
+                <div class="signup-links mt-4 text-center">
+                    <a href="{% url 'register-user' %}" class="text-green-500 hover:text-green-600">Sign Up to Apply</a> |
+                    <a href="{% url 'register-hr' %}" class="text-green-500 hover:text-green-600">Sign Up as HR</a>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-gray-800 text-white py-4">
+            <div class="container mx-auto px-4">
+                <center>
+                    <p>&copy; 2024 Job Portal. All rights reserved.</p>
+                </center>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

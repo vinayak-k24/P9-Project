@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; margin: 0;">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P9 Job Portal Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            height: 100%;
+        }
+
+        #root {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        .hero-image {
+            background-image: url('https://wallpaperaccess.com/full/4623486.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            position: relative;
+        }
+
+        main {
+            overflow-y: auto;
+        }
+
+        .job-card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+            width: 300px; /* Fixed width for the card */
+            text-align: center;
+            position: relative;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .job-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .job-company {
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .job-location {
+            color: #777;
+        }
+
+        .apply-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .apply-button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <header class="bg-gray-800 text-white py-4">
+            <div class="container mx-auto flex justify-between items-center px-4">
+                <h1 class="text-2xl font-bold">P9 Job Portal</h1>
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a href="{% url 'home' %}" class="hover:text-gray-400">Home</a></li>
+                        <li><a href="#" class="hover:text-gray-400">News</a></li>
+                        <li><a href="#" class="hover:text-gray-400">Companies</a></li>
+                        <li><a href="#" class="hover:text-gray-400">Testimonial</a></li>
+                        <li><a href="#" class="hover:text-gray-400">About</a></li>
+                    </ul>
+                </nav>
+                <div class="flex space-x-4">
+                    <a href="{% url 'login' %}" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Login</a>
+                    <a href="{% url 'register' %}" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Sign Up</a>
+                </div>
+            </div>
+        </header>
+        
+        <main class="hero-image">
+            <div class="z-10 bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Search Results for "{{ keyword }}"</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {% for job in jobs %}
+                    <div class="job-card">
+                        <div class="job-title">{{ job.title }}</div>
+                        <div class="job-company">{{ job.company }}</div>
+                        <div class="job-location">{{ job.location }}</div>
+                        <div>{{ job.description }}</div>
+                        <a href="{% url 'login' %}" class="apply-button">Apply</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+        
+        <footer class="bg-gray-800 text-white py-4">
+            <div class="container mx-auto px-4">
+                <center>
+                    <p>&copy; 2024 Job Portal. All rights reserved.</p>
+                </center>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

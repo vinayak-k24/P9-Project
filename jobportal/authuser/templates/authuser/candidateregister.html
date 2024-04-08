@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; margin: 0;">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P9 Job Portal Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        :root {
+            --register-box-width: 400px;
+        }
+
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            height: 100%;
+        }
+
+        #root {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        .bg-image {
+            background-image: url('https://wallpaperaccess.com/full/4623486.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            position: relative;
+        }
+
+        main {
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .register-container {
+            width: var(--register-box-width);
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo p {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #4a5568;
+        }
+
+        .register-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-field {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.25rem;
+        }
+
+        .register-button {
+            background-color: #48bb78;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .register-button:hover {
+            background-color: #38a169;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #48bb78;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <header class="bg-gray-800 text-white py-4">
+            <div class="container mx-auto flex justify-between items-center px-4">
+                <h1 class="text-2xl font-bold">P9 Job Portal</h1>
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a href="{% url 'home' %}" class="hover:text-gray-400">Home</a></li>
+                        <li><a href="#" class="hover:text-gray-400">News</a></li>
+                        <li><a href="#" class="hover:text-gray-400">Companies</a></li>
+                        <li><a href="#" class="hover:text-gray-400">Testimonial</a></li>
+                        <li><a href="#" class="hover:text-gray-400">About</a></li>
+                    </ul>
+                </nav>
+                <div class="flex space-x-4">
+                    <a href="{% url 'login' %}" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Login</a>
+                    <a href="{% url 'register' %}" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Sign Up</a>
+                </div>
+            </div>
+        </header>
+        <main class="bg-image">
+            <div class="register-container mx-auto">
+                <div class="logo">
+                    <!-- Replace with your logo -->
+                    <!-- <img src="logo.png" alt="Job Portal Logo"> -->
+                    <p>Your Path to Success</p>
+                </div>
+                <form class="register-form" method="post">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Username" name="username" class="input-field" required>
+                    <input type="email" placeholder="Email" name="email" class="input-field" required>
+                    <input type="password" placeholder="Password" name="password" class="input-field" required>
+                    <input type="password" placeholder="Confirm Password" name="cpassword" class="input-field" required>
+                    <button type="submit" class="register-button">Register</button>
+                </form>
+                <div class="footer-links">
+                    <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-gray-800 text-white py-4">
+            <div class="container mx-auto px-4">
+                <center>
+                    <p>&copy; 2024 Job Portal. All rights reserved.</p>
+                </center>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

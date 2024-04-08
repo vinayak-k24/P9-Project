@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Job</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            width: 220px;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        .logout-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+
+        .content {
+            margin-left: 240px;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .apply-form {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .apply-form h2 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .apply-form form {
+            display: grid;
+            grid-gap: 20px;
+        }
+
+        .apply-form label {
+            font-weight: bold;
+        }
+
+        .apply-form input,
+        .apply-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .apply-form input:focus,
+        .apply-form textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .apply-form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .apply-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+  <div class="sidebar">
+    <ul>
+        <li><a href="{% url 'dash' %}"><i class="fas fa-user"></i> <span>Home</span></a></li>
+        <li><a href="{% url 'mylist' %}"><i class="fas fa-list"></i> <span>My Jobs</span></a></li>
+    </ul>
+    <a class="logout-button" href="{% url 'logout' %}">Logout</a>
+</div>
+
+    <div class="content">
+        <div class="container">
+            <div class="apply-form">
+                <h2>Apply for Job</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="college">College Name:</label>
+                    <input type="text" id="college" name="college" required>
+
+                    <label for="passing-year">Passing Year:</label>
+                    <input type="text" id="passing-year" name="passing_year" required>
+
+                    <label for="year-experience">Year Experience:</label>
+                    <input type="text" id="year-experience" name="yearOfExperience" required>
+
+                    <label for="resume">Resume:</label>
+                    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+
+                    <label for="about">Tell us about yourself:</label>
+                    <textarea id="about" name="about" rows="4" required></textarea>
+
+                    <button type="submit" class="apply-button">Apply</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-left: 240px; /* Add a margin to the left to accommodate the sidebar */
+}
+
+
+        .job-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+            flex: 1 1 300px;
+            max-width: calc(33.333% - 20px);
+            margin-right: 20px; /* Add margin to the right side of the job card */
+        }
+
+        .job-card:last-child {
+            margin-right: 0; /* Remove margin from the last job card */
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+        }
+
+        .card-title {
+            margin-bottom: 0;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .job-details {
+            margin-bottom: 20px;
+        }
+
+        .btn-apply {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-apply:hover {
+            background-color: #0056b3;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            width: 220px;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        .logout-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+
+    </style>
+</head>
+<body>
+  <div class="sidebar">
+    <ul>
+        <li><a href="{% url 'dash' %}"><i class="fas fa-user"></i> <span>Home</span></a></li>
+        <li><a href="{% url 'mylist' %}"><i class="fas fa-list"></i> <span>My Jobs</span></a></li>
+    </ul>
+    <a class="logout-button" href="{% url 'logout' %}">Logout</a>
+</div>
+
+  <div class="container">
+    {% for job in jobpost %}
+      <div class="job-card">
+        <div class="card-header">
+          <h5 class="card-title">{{job.title}}</h5>
+        </div>
+        <div class="card-body">
+          <div class="job-details">
+            <p><strong>Company:</strong> {{job.companyName}}</p>
+            <p><strong>Salary:</strong> Rs.{{job.salaryLow}} - Rs.{{job.salaryHigh}}</p>
+            <p><strong>Last Date:</strong> {{job.lastDateToApply}}</p>
+          </div>
+          <a href="{% url 'applyjob' job.id %}" class="btn btn-apply">Apply Now</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
